@@ -7,9 +7,10 @@ void addEdge(vector <pair <int,int> > *adjList, int, int, int);
 void printGraph(vector <pair <int,int> > *adjList, int);
 
 int main(){
-	int V=5;
-	vector <pair<int, int> > adjList[V];
-	addEdge(adjList,0,1,10); 
+	
+    int V=5;
+    vector <pair<int, int> > adjList[V];
+    addEdge(adjList,0,1,10); 
     addEdge(adjList,0,4,20); 
     addEdge(adjList,1,2,30); 
     addEdge(adjList,1,3,40); 
