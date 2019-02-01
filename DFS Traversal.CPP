@@ -37,18 +37,20 @@ void Graph:: DFSUtil(int root, bool *visited){
 
 
 int main(){
-	Graph g(4); 
+    
+    Graph g(4); 
     g.addEdge(0, 1); 
     g.addEdge(0, 2); 
     g.addEdge(1, 2); 
     g.addEdge(2, 0); 
     g.addEdge(2, 3); 
     g.addEdge(3, 3); 
-	cout<<endl<<"DFS: ";
-	g.DFS(2);
+    cout<<endl<<"DFS: ";
+    g.DFS(2);
 
-	return 0;	
+    return 0;	
 }
+
 /*
 OUTPUT ======>>>>
 BFS: 2 0 1 3
