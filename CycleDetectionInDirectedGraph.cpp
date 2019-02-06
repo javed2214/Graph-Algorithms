@@ -17,7 +17,7 @@ void printGraph(vector<vector<int>> &AdjList, int V){
 	return;
 }
 
-bool isCyclicUtil(vector<vector<int>> &AdjList, int vx, int V, bool *visited, bool *recStack){
+bool isCyclicUtil(vector<vector<int>> &AdjList, int vx, bool *visited, bool *recStack){
 	if(visited[vx]==false){
 		visited[vx]=true;
 		recStack[vx]=true;
@@ -43,7 +43,7 @@ bool isCyclic(vector<vector<int>> &AdjList, int V){
 	}
 
 	for(int i=0;i<V;i++){
-		if(isCyclicUtil(AdjList,i,V,visited,recStack))
+		if(isCyclicUtil(AdjList,i,visited,recStack))
 			return true;
 	}
 	return false;
