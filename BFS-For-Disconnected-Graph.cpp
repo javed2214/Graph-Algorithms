@@ -1,4 +1,5 @@
 // Program to Find BFS Traversal of Disconnected Graph
+// https://www.geeksforgeeks.org/bfs-disconnected-graph/
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -18,7 +19,7 @@ void printGraph(vector<vector<int>>&AdjList, int V){
 }
 
 void BFSUtil(vector<vector<int>>&AdjList, bool *visited, int root){
-	
+
 	visited[root]=true;
 	queue<int>q;
 	q.push(root);
