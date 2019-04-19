@@ -84,8 +84,8 @@ int main(){
 		
 		{'0','*','0','s'},	// s-> Source
 		{'*','0','*','*'},	// d-> Destination
-		{'0','0','*','*'},
-		{'d','*','*','*'}
+		{'0','0','*','*'},	// 0-> Cell you can't Travel
+		{'d','*','*','*'}	// *-> Cell you can Travel
 	};
 
 	cout<<minDistance(grid);
