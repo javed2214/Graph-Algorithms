@@ -18,7 +18,7 @@ void printGraph(vector<vector<int>> &AdjList, int V){
 		cout<<"\n";
 	}
 }
-int notVisited(vector<int>&path, int it){
+int notVisited(vector<int>&path, int it){ 
 
 	for(auto ptr:path){
 		if(ptr==it)
