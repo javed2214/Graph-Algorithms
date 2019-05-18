@@ -24,7 +24,7 @@ bool isCyclicUtil(vector<vector<int>> &AdjList, int vx, bool *visited, bool *rec
 
 		for(auto it:AdjList[vx]){
 			if(visited[it]==false)
-				return isCyclicUtil(AdjList,it,V,visited,recStack);
+				return isCyclicUtil(AdjList,it,visited,recStack);
 			else if(recStack[it]==true)
 				return true;
 		}
