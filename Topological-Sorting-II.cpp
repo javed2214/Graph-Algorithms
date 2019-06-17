@@ -14,10 +14,6 @@ bool toposort(int n){	// Returns True if there Exist Toposort, False if there is
 	priority_queue<int,vector<int>,greater<int>> pq;
 
 	for(int i=1;i<=n;i++)
-		for(auto it:g[i])
-			in_degree[it]++;
-
-	for(int i=1;i<=n;i++)
 		if(!in_degree[i])
 			pq.push(i);
 
@@ -49,6 +45,7 @@ int main(){
 		int u,v;
 		cin>>u>>v;
 		g[u].push_back(v);
+		in_degree[v]++;		// In-Degree of Any Node refers to the Number of Incoming Paths to that Node
 	}
 	bool x=toposort(n);
 
