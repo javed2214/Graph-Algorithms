@@ -5,92 +5,57 @@
 
 #include<bits/stdc++.h>
 using namespace std;
+#define INF INT_MAX
+#define MX 10
+typedef pair<int,int> P;
 
-template <typename T>
+vector<pair<int,int>> g[MX];
 
-class Graph{
+void dijkstraAlgo(int u, int n){
 
-private:
-	unordered_map<T,list<pair<T,int>>>Map;
+	priority_queue<P,vector<P>,greater<P>> q;
+	int dis[MX];
+	int vis[MX];
+	for(int i=1;i<=n;i++) dis[i]=INF, vis[i]=0;
 
-public:
-	void addEdge(T u, T v, int wt, bool bidr=true){
-		Map[u].push_back(make_pair(v,wt));
-		if(bidr) Map[v].push_back(make_pair(u,wt));
-	}
+	q.push({0,u});
+	dis[u]=0;
 
-	void printGraph(){
-		for(auto it:Map){
-			cout<<it.first<<"=>";
-			for(auto ptr:it.second)
-				cout<<"("<<ptr.first<<" "<<ptr.second<<") ";
-			cout<<"\n";
-		}
-	}
+	while(!q.empty()){
 
-	void Dijkstra(T src){
+		int temp=q.top().second;
+		q.pop();
 
-		unordered_map<T,int> dist;
+		if(vis[temp]) continue;
 
-		for(auto it:Map)
-			dist[it.first]=INT_MAX;
+		vis[temp]=1;
 
-		set<pair<int,T>>Set;
-		
-		dist[src]=0;
-		Set.insert(make_pair(0,src));
-
-		while(!Set.empty()){
-			auto p=*(Set.begin());
+		for(auto it:g[temp]){
 			
-			T node=p.second;
-			int nodeDist=p.first;
+			int v=it.first;
+			int w=it.second;
 
-			Set.erase(Set.begin());
-
-			for(auto it:Map[node]){
-				if(nodeDist + it.second < dist[it.first]){
-					T dest=it.first;
-					auto f=Set.find(make_pair(dist[dest],dest));
-					if(f!=Set.end()){
-						Set.erase(f);
-					}
-					dist[dest]=nodeDist + it.second;
-					Set.insert(make_pair(dist[dest],dest));
-				}
+			if(dis[v] > dis[temp]+w){
+				dis[v]=dis[temp]+w;
+				q.push({dis[v],v});
 			}
 		}
-		for(auto d:dist){
-			cout<<d.first<<" is Located at a Distance of "<<d.second<<"\n";
-		}
 	}
-};
+	cout<<"Distance from "<<u<<"\n";
+	for(int i=1;i<=n;i++) cout<<dis[i]<<" ";
+}
 
 int main(){
 
-	// Graph<string> G;
-
-	/*
-	G.addEdge("Amritsar","Delhi",1);
-	G.addEdge("Amritsar","Jaipur",4);
-	G.addEdge("Jaipur","Delhi",2);
-	G.addEdge("Jaipur","Mumbai",8);
-	G.addEdge("Bhopal","Agra",2);
-	G.addEdge("Mumbai","Bhopal",3);
-	G.addEdge("Agra","Delhi",1);
-	*/
-
-	Graph<int> G;
-
-	G.addEdge(1,2,1);
-	G.addEdge(1,3,4);
-	G.addEdge(1,3,1);
-	G.addEdge(3,4,2);
-	G.addEdge(1,4,7);
-
-	G.printGraph();
-
-	G.Dijkstra(1);
+	int n,e;
+	cin>>n>>e;
+	for(int i=1;i<=e;i++){
+		int u,v,w;
+		cin>>u>>v>>w;
+		g[u].push_back({v,w});
+		g[v].push_back({u,w});
+	}
+	dijkstraAlgo(1,n);
 
 	return 0;
 }
