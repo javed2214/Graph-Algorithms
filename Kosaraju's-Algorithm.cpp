@@ -19,13 +19,22 @@ void clearGraph(){
 		g[i].clear();
 }
 
-void dfs(int u){
+void dfsStack(int u){
 
 	if(vis[u]) return;
 	vis[u]=true;
 	for(auto it:g[u])
-		dfs(it);
+		dfsStack(it);
 	S.push(u);
+}
+
+void dfs(int u){
+
+	if(vis[u]) return;
+	vis[u]=true;
+	cout<<u<<" ";
+	for(auto it:g[u])
+		dfs(it);
 }
 
 int main(){
@@ -44,26 +53,32 @@ int main(){
 
 	for(int i=1;i<=n;i++){
 		if(!vis[i])
-			dfs(i);
+			dfsStack(i);
 	}
 
 	memset(vis,false,sizeof(vis));
 	clearGraph();
 
-	for(int i=1;i<=n;i++)
+	for(int i=1;i<=e;i++)
 		g[v[i]].push_back(u[i]);
 
 	int c=0;
+
+	cout<<"\nStrongly Connected Components: \n";
 
 	while(!S.empty()){
 
 		int u=S.top();
 		S.pop();
 		if(vis[u]) continue;
-		else dfs(u),c++;
+		else{
+			dfs(u);
+			c++;
+			cout<<"\n";
+		}
 	}
 	
-	cout<<"No of Strongly Connected Components: "<<c;
+	cout<<"No of SCCs: "<<c;
 
 	return 0;
 }
