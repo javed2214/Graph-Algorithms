@@ -17,12 +17,12 @@ void clearGraph(){
 		g[i].clear();
 }
 
-void dfs1(ll u){
+void dfsStack(ll u){
 
 	if(vis[u]) return;
 	vis[u]=1;
 	for(auto it:g[u])
-		dfs1(it);
+		dfsStack(it);
 	S.push(u);
 }
 
@@ -49,7 +49,7 @@ int main(){
 	}
 	for(ll i=1;i<=n;i++){
 		if(!vis[i])
-			dfs1(i);
+			dfsStack(i);
 	}
 	memset(vis,0,sizeof(vis));
 	clearGraph();
