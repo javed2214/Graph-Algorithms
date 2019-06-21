@@ -1,5 +1,6 @@
 // TRAFFICN - Traffic Network (SPOJ)
 // https://www.spoj.com/problems/TRAFFICN/
+// Coolest Dijksta's Problem
 
 /*---------------------------
     Author : Javed Ansari
