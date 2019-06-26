@@ -12,23 +12,17 @@ void printVector(vector<int> &v){
 	cout<<"\n";
 }
 
-void printPaths(int mat[][3], vector<int> &v, int i, int j, int n, int m){
+void printPaths(int mat[][3], vector<int> v, int i, int j, int n, int m){
 
 	if(i > n || j > m) return;
 
+	v.push_back(mat[i][j]);
+	
 	if(i==n && j==m){
+		printVector(v);
 
-		for(auto it:v)
-			cout<<it<<" ";
-		
-		cout<<mat[i][j]<<" ";	// Becoz Last Element is Not Pushed into the Vector
-
-		cout<<"\n";
-		
 		return;
 	}
-	
-	v.push_back(mat[i][j]);
 
 	printPaths(mat,v,i+1,j,n,m);
 	printPaths(mat,v,i,j+1,n,m);
