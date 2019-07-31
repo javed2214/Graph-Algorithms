@@ -44,8 +44,8 @@ int main(){
 
 	bool x = dfs(1,-1);
 
-	if(x) cout<<"\nCycle is Present";
-	else cout<<"\nNot Present!";
+	if(x) cout<<"Cycle is Present";
+	else cout<<"Not Present!";
 
 	cout<<endl;
 
