@@ -1,4 +1,5 @@
-// Program to Print Cycles of Graph
+// Program to Print Cycle in an Undirected Graph
+// Using DFS
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -29,7 +30,6 @@ bool dfs(int u, int par){
 	return false;
 }
 
-
 int main(){
 
 	int n, m;
@@ -44,17 +44,17 @@ int main(){
 
 	bool x = dfs(1,-1);
 
-	if(x) cout<<"Cycle is Present";
-	else cout<<"Not Present!";
-
-	cout<<endl;
-
-	while(true){
-		cout<<cam<<" ";
-		cam = parent[cam];
-		if(cam == fam) break;
+	if(x){
+		cout<<"Cycle is Present\n";
+	
+		while(true){
+			cout<<cam<<" ";
+			cam = parent[cam];
+			if(cam == fam) break;
+		}
+		cout<<cam;
 	}
-	cout<<cam;
+	else cout<<"Not Present!";
 
 	return 0;
 }
