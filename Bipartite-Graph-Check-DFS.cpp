@@ -1,5 +1,6 @@
 // Program to Check Whether the Graph is Bipartite or Not using DFS
 // https://leetcode.com/problems/is-graph-bipartite/
+// BFS Solution is Better. It fails at some Test Cases.
 
 #include<bits/stdc++.h>
 using namespace std;
