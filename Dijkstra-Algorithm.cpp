@@ -1,4 +1,4 @@
-// Program to Implement Dijkstra Algorithm
+// Dijkstra Algorithm Implementation
 // Applicable for Weighted Graph
 // Also called Single Source Shortest Path Algorithm
 // No Negative Weights
