@@ -1,56 +1,64 @@
-// Program to Count Number of Possible Paths b/w Two Vertices
+// Program to Count Number of Possible Paths between Two Vertices
+// [ Directed Graph ]
+// Backtracking Application
 
 #include<bits/stdc++.h>
 using namespace std;
+#define MX 101
 
-class Graph{
-	int V;
-	list <int> *adjList;
-public:
-	Graph(int V){
-		this->V=V;
-		adjList=new list <int> [V];
-	}
-	void addEdge(int u, int v){		// Directed Graph
-		adjList[u].push_back(v);
-	}
-	int countPath(int s, int d);
-	void countPathUtil(int,int,int &,bool *);
+vector <int> g[MX];
+int vis[MX];
+int co = 0;
 
-};
-int Graph:: countPath(int s, int d){
-	bool *visited=new bool[V];
-	for(int i=0;i<V;i++)
-		visited[i]=false;
-	int pathCount=0;
-	countPathUtil(s,d,pathCount,visited);
-	return pathCount;
-}
-void Graph:: countPathUtil(int s,int d,int &pathCount,bool *visited){
-	visited[s]=true;
-	if(s==d)
-		pathCount++;
+void countPath(int src, int dest){
+
+	vis[src] = 1;
+
+	if(src == dest)
+		co++;
+	
 	else{
-		for(int ptr:adjList[s]){
-			if(visited[ptr]==false)
-				countPathUtil(ptr,d,pathCount,visited);
+		for(auto it:g[src]){
+			if(!vis[it])
+				countPath(it,dest);
 		}
 	}
-	visited[s]=false;
+	vis[src] = 0;
 }
 
 int main(){
-	Graph g(5); 
-   	g.addEdge(1,0);
-   	g.addEdge(0,2);
-   	g.addEdge(1,2);
-   	g.addEdge(1,4);
-   	g.addEdge(2,4);
-   	g.addEdge(3,4);
-   	g.addEdge(2,3);
-    int s=1,d=4;
-    cout<<g.countPath(s,d);
 
-  	return 0;
+	int n,m;
+	cin>>n>>m;
+
+	for(int i=0;i<m;i++){
+		int u,v;
+		cin>>u>>v;
+		g[u].push_back(v);
+	}
+
+	int src, dest;
+	cin>>src>>dest;
+
+	countPath(src, dest);
+
+	cout<<"No of Possible Paths: "<<co;
+
+	return 0;
 }
-// OUTPUT ==> 5
+
+/*
+
+Test Case:
+
+3 3
+1 2
+2 3
+1 3
+1 3
+
+Output:
+
+No of Possible Paths: 2
+
+*/
