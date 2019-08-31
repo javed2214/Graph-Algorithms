@@ -23,7 +23,7 @@ void countPath(int src, int dest){
 				countPath(it,dest);
 		}
 	}
-	vis[src] = 0;
+	vis[src] = 0;	// BackTrack
 }
 
 int main(){
