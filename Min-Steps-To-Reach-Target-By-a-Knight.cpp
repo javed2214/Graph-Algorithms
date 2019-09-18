@@ -64,7 +64,7 @@ int minStepToReachTarget(int srcX, int srcY, int destX, int destY, int N){
 
 int main(){
 
-	int N = 30; 
+    int N = 30; 
     int srcX = 1, srcY = 1;
     int destX = 30, destY = 30;
     
