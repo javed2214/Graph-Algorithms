@@ -1,6 +1,6 @@
 // Program to Find Minimum no of Edges Between Two Vertices using DFS
 // https://www.geeksforgeeks.org/minimum-number-of-edges-between-two-vertices-of-a-graph-using-dfs/
-// Shortest Path Between Two Vertices using DFS
+// Shortest Distance Between Two Vertices using DFS
 
 #include<bits/stdc++.h>
 using namespace std;
