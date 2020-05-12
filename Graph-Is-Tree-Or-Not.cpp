@@ -1,4 +1,4 @@
-// Program to Check if a Graph is Tree or Not
+// Program to Check Whether the Given Graph is Tree or Not
 // An Undirected Graph is Tree if it has Following Properties
 // => There is No Cycle
 // => The Graph is Connected
@@ -6,56 +6,74 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-vector<int> AdjList[101];
-bool visited[101];
-int parent[101];
+#define MAX 1001
 
-void addEdge(int u, int v){
+vector <int> g[MAX];
+vector <int> vis(MAX, 0);
+vector <int> parent(MAX, -1);
 
-	AdjList[u].push_back(v);
-	AdjList[v].push_back(u);
+
+// BFS to Check Whether the Graph is Cyclic or Not
+
+bool isCycle(int root, int n){
+
+    queue <int> q;
+    q.push(root);
+    vis[root] = 1;
+
+    while(!q.empty()){
+
+        int temp = q.front();
+        q.pop();
+
+        for(auto it: g[temp]){
+
+            if(!vis[it]){
+                vis[it] = 1;
+                parent[it] = temp;
+                q.push(it);
+            }
+            else if(parent[temp] != it){
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
-bool istreeUtil(int u, bool *visited, int *parent){
+// DFS to Check Whether the Graph is Cyclic or Not
 
-	visited[u]=true;
-	for(auto it:AdjList[u]){
-		if(visited[it]==false){
-			parent[it]=u;
-			if(istreeUtil(it,visited,parent))
-				return true;
-		}
-		else if(parent[u]!=it)	// Condition for Cycle Detection
-			return true;
-	}
-	return false;
-}
+bool dfs(int u){
 
-bool isTree(int n){
-
-	memset(visited,false,sizeof(visited));
-	memset(parent,-1,sizeof(parent));
-
-	if(istreeUtil(0,visited,parent)) return false;
-
-	for(int i=0;i<n;i++)	// Check is Each vertex is Recheable from Root Node
-		if(visited[i]==false)
-			return false;
-
-	return true;
+    vis[u] = 1;
+    for(auto it: g[u]){
+        if(!vis[it]){
+            parent[it] = u;
+            if(dfs(it)) return true;
+        }
+        else if(parent[u] != it) return true;
+    }
+    return false;
 }
 
 int main(){
 
-	int n=5;
+    int n, m;
+    cin >> n >> m;
 
-	addEdge(1,0);
-	addEdge(0,2);
-	addEdge(0,3);
-	addEdge(3,4);
+    for(int i=0;i<m;i++){
+        
+        int u, v;
+        cin >> u >> v;
 
-	if(isTree(n)) cout<<"Graph is Tree";
-	else cout<<"Graph is Not Tree";
+        g[u].push_back(v);
+        g[v].push_back(u);
+    }
 
-	return 0;
+    if(isCycle(0, n)) return !printf("Graph is Not a Tree! (It is Cyclic)");
+    for(int i=0;i<n;i++) if(!vis[i]) return !printf("Graph is Not a Tree! (It has Multiple Components)");
+
+    printf("Graph is a Tree!");
+
+    return 0;
 }
