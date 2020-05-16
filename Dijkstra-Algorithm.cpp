@@ -1,61 +1,62 @@
-// Dijkstra Algorithm Implementation
-// Applicable for Weighted Graph
-// Also called Single Source Shortest Path Algorithm
-// No Negative Weights
+// Dijkstra Algorithm
+// Single Source Shortest Path Algorithm
+// https://www.youtube.com/watch?v=CLnpzCnSDSY&list=PL2q4fbVm1Ik64I3VqbVGRfl_OgYzvzt9m&index=7
 
 #include<bits/stdc++.h>
 using namespace std;
+
+#define MAX 10001
 #define INF INT_MAX
-#define MX 10
-typedef pair<int,int> P;
+#define P pair<int, int>
 
-vector<pair<int,int>> g[MX];
+vector <pair<int, int>> g[MAX];
+vector <int> dis(MAX, INF);
 
-void dijkstraAlgo(int u, int n){
+void dijkstraAlgorithm(int root, int n){
 
-	priority_queue<P,vector<P>,greater<P>> q;
-	int dis[MX];
-	int vis[MX];
-	for(int i=1;i<=n;i++) dis[i]=INF, vis[i]=0;
+    priority_queue <P, vector<P>, greater<P>> pq;
+    pq.push({0, root});     // First: Current Distance, Second: Current Node
+    dis[1] = 0;
 
-	q.push({0,u});
-	dis[u]=0;
+    while(!pq.empty()){
 
-	while(!q.empty()){
+        pair <int, int> temp = pq.top();
 
-		int temp=q.top().second;
-		q.pop();
+        int cur_dis = temp.first;
+        int cur_node = temp.second;
+        
+        pq.pop();
 
-		if(vis[temp]) continue;
+        for(auto it: g[cur_node]){
 
-		vis[temp]=1;
+            if(cur_dis + it.second < dis[it.first]){
 
-		for(auto it:g[temp]){
-			
-			int v=it.first;
-			int w=it.second;
+                dis[it.first] = cur_dis + it.second;
+                pq.push({dis[it.first], it.first});
+            }
+        }
+    }
 
-			if(dis[v] > dis[temp]+w){
-				dis[v]=dis[temp]+w;
-				q.push({dis[v],v});
-			}
-		}
-	}
-	cout<<"Distance from "<<u<<"\n";
-	for(int i=1;i<=n;i++) cout<<dis[i]<<" ";
+    for(int i=1;i<=n;i++) cout << dis[i] << " ";
+
+    return;
 }
 
 int main(){
 
-	int n,e;
-	cin>>n>>e;
-	for(int i=1;i<=e;i++){
-		int u,v,w;
-		cin>>u>>v>>w;
-		g[u].push_back({v,w});
-		g[v].push_back({u,w});
-	}
-	dijkstraAlgo(1,n);
+    int n, m;
+    cin >> n >> m;
 
-	return 0;
+    for(int i=0;i<m;i++){
+
+        int u, v, w;
+        cin >> u >> v >> w;
+
+        g[u].push_back({v, w});
+        g[v].push_back({u, w});
+    }
+
+    dijkstraAlgorithm(1, n);    // Shortest Distance from Node 1 to All the Nodes
+
+    return 0;
 }
