@@ -16,7 +16,7 @@ void dijkstraAlgorithm(int root, int n){
 
     priority_queue <P, vector<P>, greater<P>> pq;
     pq.push({0, root});     // First: Current Distance, Second: Current Node
-    dis[1] = 0;
+    dis[root] = 0;
 
     while(!pq.empty()){
 
