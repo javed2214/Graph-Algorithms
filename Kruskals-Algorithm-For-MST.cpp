@@ -14,13 +14,14 @@ struct node{
 
 node arr[MAX];
 int par[MAX];
+int siz[MAX];
 
 bool Comp(node x, node y){
     return x.w < y.w;
 }
 
 void init(int n){
-    for(int i=0;i<=n;i++) par[i] = i;
+    for(int i=0;i<=n;i++) par[i] = i, siz[i] = 1;
 }
 
 int find(int a){
@@ -32,7 +33,9 @@ int find(int a){
 }
 
 void merge(int a, int b){
+    if(siz[b] > siz[a]) swap(a, b);
     par[b] = a;
+    siz[a] += siz[b];
 }
 
 int main(){
