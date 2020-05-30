@@ -24,7 +24,7 @@ void init(int n){
     for(int i=0;i<=n;i++) par[i] = i, siz[i] = 1;
 }
 
-int find(int a){
+int root(int a){
 
     while(a != par[a])
         a = par[a];
@@ -32,7 +32,7 @@ int find(int a){
     return a;
 }
 
-void merge(int a, int b){
+void take_union(int a, int b){
     if(siz[b] > siz[a]) swap(a, b);
     par[b] = a;
     siz[a] += siz[b];
@@ -51,13 +51,13 @@ int main(){
 
     for(int i=0;i<m;i++){
 
-        a = find(arr[i].a);
-        b = find(arr[i].b);
+        a = root(arr[i].a);
+        b = root(arr[i].b);
 
         if(a != b){
 
             sum += arr[i].w;
-            merge(a, b);
+            take_union(a, b);
         }
     }
     cout << sum << endl;
