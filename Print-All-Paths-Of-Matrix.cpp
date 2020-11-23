@@ -1,5 +1,4 @@
 // Program to Print All Possible Paths from Top Left to Bottom Right of a Matrix
-// Using DFS
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -20,8 +19,6 @@ void printPaths(int mat[][3], vector<int> v, int i, int j, int n, int m){
 	
 	if(i==n && j==m){
 		printVector(v);
-
-		return;
 	}
 
 	printPaths(mat,v,i+1,j,n,m);
